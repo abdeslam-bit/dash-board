@@ -99,6 +99,7 @@ export default function SideBare({ open, handleDrawerClose }) {
       icon: <ContactsOutlinedIcon />,
       path: "/contacts",
     },
+    
     {
       text: "Invioces Balances",
       icon: <ReceiptOutlinedIcon />,
