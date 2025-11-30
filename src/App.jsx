@@ -10,6 +10,7 @@ import SideBare from "./components/SideBare";
 
 // hooks
 import { createContext, useState } from "react";
+import { Outlet } from "react-router-dom";
 
 
 const DrawerHeader = styled("div")(({ theme }) => ({
@@ -50,9 +51,9 @@ export default function App() {
         <TopBar open={open} handleDrawerOpen={handleDrawerOpen} />
         <SideBare open={open} handleDrawerClose={handleDrawerClose} />
 
-        <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
-          <DrawerHeader />
-          <Typography sx={{ marginBottom: 2 }}>Lorem</Typography>
+        <Box component="main" sx={{ flexGrow: 1, p: 3,bgcolor:Ctheme==="light"?"#fff":"#18181b",minHeight:'100vh' }}>
+          <DrawerHeader/>
+          <Outlet/>
         </Box>
       </Box>
     </ThemeContext.Provider>
