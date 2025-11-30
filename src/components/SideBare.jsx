@@ -153,13 +153,13 @@ export default function SideBare({ open, handleDrawerClose }) {
           )}
         </IconButton>
       </DrawerHeader>
-      <Divider
+      {/* <Divider
         sx={
           Ctheme === "light"
             ? { backgroundColor: "" }
             : { backgroundColor: "white" }
         }
-      />
+      /> */}
 
       <Avatar
         alt="Remy Sharp"
