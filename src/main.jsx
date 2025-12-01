@@ -8,7 +8,6 @@ import Dashboard from "./pages/dashboard/Dashboard";
 import Team from "./pages/team/Team";
 import BarChart from "./pages/barChart/BarChart";
 import Calendar from "./pages/calendar/Calendar";
-import Contacts from "./pages/contacts/Contacts";
 import Faq from "./pages/faq/Faq";
 import Form from "./pages/form/Form";
 import Geography from "./pages/geography/Geography";
@@ -28,10 +27,6 @@ const router = createBrowserRouter([
       {
         path:"team",
         element:<Team/>
-      },
-      {
-        path:"contacts",
-        element:<Contacts/>
       },
       {
         path:"invoices",

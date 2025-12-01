@@ -98,12 +98,6 @@ export default function SideBare({ open, handleDrawerClose }) {
     { text: "Dashboard", icon: <HomeOutlinedIcon />, path: "/" },
     { text: "Manage Team", icon: <PeopleOutlineOutlinedIcon />, path: "/team" },
     {
-      text: "Contacts Information",
-      icon: <ContactsOutlinedIcon />,
-      path: "/contacts",
-    },
-
-    {
       text: "Invioces Balances",
       icon: <ReceiptOutlinedIcon />,
       path: "/invoices",
