@@ -44,7 +44,7 @@ export const rows = [
 ];
 
 export const columns = [
-  { field: "id", headerName: "ID", align: "center", headerAlign: "center" },
+  { field: "id", headerName: "ID", align: "center", headerAlign: "center",width:3, },
   { field: "name", headerName: "name", align: "center", headerAlign: "center" },
   {
     field: "email",

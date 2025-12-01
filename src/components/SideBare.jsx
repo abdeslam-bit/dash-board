@@ -9,8 +9,7 @@ import ListItem from "@mui/material/ListItem";
 import ListItemButton from "@mui/material/ListItemButton";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
-// import InboxIcon from "@mui/icons-material/MoveToInbox";
-// import MailIcon from "@mui/icons-material/Mail";
+import Tooltip from "@mui/material/Tooltip";
 import { useContext } from "react";
 import { ThemeContext } from "../App";
 import { useNavigate } from "react-router";
@@ -18,7 +17,6 @@ import { useNavigate } from "react-router";
 // mui icon
 import HomeOutlinedIcon from "@mui/icons-material/HomeOutlined";
 import PeopleOutlineOutlinedIcon from "@mui/icons-material/PeopleOutlineOutlined";
-import ContactsOutlinedIcon from "@mui/icons-material/ContactsOutlined";
 import ReceiptOutlinedIcon from "@mui/icons-material/ReceiptOutlined";
 import PersonOutlinedIcon from "@mui/icons-material/PersonOutlined";
 import CalendarTodayOutlinedIcon from "@mui/icons-material/CalendarTodayOutlined";
@@ -33,7 +31,6 @@ import Avatar from "@mui/material/Avatar";
 import Typography from "@mui/material/Typography";
 
 import { useLocation } from "react-router-dom";
-
 
 const drawerWidth = 240;
 
@@ -119,7 +116,89 @@ export default function SideBare({ open, handleDrawerClose }) {
     { text: "Geography chart", icon: <MapIcon />, path: "/geography" },
   ];
   let navigate = useNavigate();
-  let locatin = useLocation()
+  let locatin = useLocation();
+
+  // Reusable function to render list items
+  const renderListItems = (items) => {
+    return items.map((item) => (
+      <ListItem key={item.path} disablePadding sx={{ display: "block" }}>
+        <Tooltip 
+          title={item.text} 
+          placement="right" 
+          arrow
+          disableHoverListener={open}
+        >
+          <ListItemButton
+            onClick={() => {
+              navigate(item.path);
+            }}
+            sx={[
+              {
+                minHeight: 48,
+                px: 2.5,
+                bgcolor:
+                  item.path === locatin.pathname
+                    ? Ctheme === "light"
+                      ? "#e0e0e0"
+                      : "#757575"
+                    : null,
+                "&:hover": {
+                  bgcolor:
+                    item.path === locatin.pathname
+                      ? Ctheme === "light"
+                        ? "#e0e0e0"
+                        : "#757575"
+                      : Ctheme === "light"
+                      ? "rgba(0, 0, 0, 0.04)"
+                      : "rgba(255, 255, 255, 0.08)",
+                },
+              },
+              open
+                ? {
+                    justifyContent: "initial",
+                  }
+                : {
+                    justifyContent: "center",
+                  },
+            ]}
+          >
+            <ListItemIcon
+              sx={[
+                {
+                  minWidth: 0,
+                  justifyContent: "center",
+                  color:
+                    Ctheme === "dark" ? "#e4e4e7" : "rgba(0, 0, 0, 0.54)",
+                },
+                open
+                  ? {
+                      mr: 3,
+                    }
+                  : {
+                      mr: "auto",
+                    },
+              ]}
+            >
+              {item.icon}
+            </ListItemIcon>
+            <ListItemText
+              primary={item.text}
+              sx={[
+                open
+                  ? {
+                      opacity: 1,
+                    }
+                  : {
+                      opacity: 0,
+                    },
+              ]}
+            />
+          </ListItemButton>
+        </Tooltip>
+      </ListItem>
+    ));
+  };
+
   return (
     <Drawer
       variant="permanent"
@@ -147,13 +226,6 @@ export default function SideBare({ open, handleDrawerClose }) {
           )}
         </IconButton>
       </DrawerHeader>
-      {/* <Divider
-        sx={
-          Ctheme === "light"
-            ? { backgroundColor: "" }
-            : { backgroundColor: "white" }
-        }
-      /> */}
 
       <Avatar
         alt="Remy Sharp"
@@ -197,63 +269,7 @@ export default function SideBare({ open, handleDrawerClose }) {
         }
       />
 
-      <List>
-        {array1.map((item) => (
-          <ListItem key={item.path} disablePadding sx={{ display: "block" }}>
-            <ListItemButton
-              onClick={() => {
-                navigate(item.path);
-              }}
-              sx={[
-                {
-                  minHeight: 48,
-                  px: 2.5,
-                  bgcolor:item.path === locatin.pathname? (Ctheme === "light"? "#e0e0e0":"#757575"):null
-                },
-                open
-                  ? {
-                      justifyContent: "initial",
-                    }
-                  : {
-                      justifyContent: "center",
-                    },
-              ]}
-            >
-              <ListItemIcon
-                sx={[
-                  {
-                    minWidth: 0,
-                    justifyContent: "center",
-                    color:
-                      Ctheme === "dark" ? "#e4e4e7" : "rgba(0, 0, 0, 0.54)",
-                  },
-                  open
-                    ? {
-                        mr: 3,
-                      }
-                    : {
-                        mr: "auto",
-                      },
-                ]}
-              >
-                {item.icon}
-              </ListItemIcon>
-              <ListItemText
-                primary={item.text}
-                sx={[
-                  open
-                    ? {
-                        opacity: 1,
-                      }
-                    : {
-                        opacity: 0,
-                      },
-                ]}
-              />
-            </ListItemButton>
-          </ListItem>
-        ))}
-      </List>
+      <List>{renderListItems(array1)}</List>
       <Divider
         sx={
           Ctheme === "light"
@@ -261,63 +277,7 @@ export default function SideBare({ open, handleDrawerClose }) {
             : { backgroundColor: "white" }
         }
       />
-      <List>
-        {array2.map((item) => (
-          <ListItem key={item.path} disablePadding sx={{ display: "block" }}>
-            <ListItemButton
-              onClick={() => {
-                navigate(item.path);
-              }}
-              sx={[
-                {
-                  minHeight: 48,
-                  px: 2.5,
-                  bgcolor:item.path === locatin.pathname? (Ctheme === "light"? "#e0e0e0":"#757575"):null
-                },
-                open
-                  ? {
-                      justifyContent: "initial",
-                    }
-                  : {
-                      justifyContent: "center",
-                    },
-              ]}
-            >
-              <ListItemIcon
-                sx={[
-                  {
-                    minWidth: 0,
-                    justifyContent: "center",
-                    color:
-                      Ctheme === "dark" ? "#e4e4e7" : "rgba(0, 0, 0, 0.54)",
-                  },
-                  open
-                    ? {
-                        mr: 3,
-                      }
-                    : {
-                        mr: "auto",
-                      },
-                ]}
-              >
-                {item.icon}
-              </ListItemIcon>
-              <ListItemText
-                primary={item.text}
-                sx={[
-                  open
-                    ? {
-                        opacity: 1,
-                      }
-                    : {
-                        opacity: 0,
-                      },
-                ]}
-              />
-            </ListItemButton>
-          </ListItem>
-        ))}
-      </List>
+      <List>{renderListItems(array2)}</List>
       <Divider
         sx={
           Ctheme === "light"
@@ -325,63 +285,7 @@ export default function SideBare({ open, handleDrawerClose }) {
             : { backgroundColor: "white" }
         }
       />
-      <List>
-        {array3.map((item) => (
-          <ListItem key={item.path} disablePadding sx={{ display: "block" }}>
-            <ListItemButton
-              onClick={() => {
-                navigate(item.path);
-              }}
-              sx={[
-                {
-                  minHeight: 48,
-                  px: 2.5,
-                  bgcolor:item.path === locatin.pathname? (Ctheme === "light"? "#e0e0e0":"#757575"):null
-                },
-                open
-                  ? {
-                      justifyContent: "initial",
-                    }
-                  : {
-                      justifyContent: "center",
-                    },
-              ]}
-            >
-              <ListItemIcon
-                sx={[
-                  {
-                    minWidth: 0,
-                    justifyContent: "center",
-                    color:
-                      Ctheme === "dark" ? "#e4e4e7" : "rgba(0, 0, 0, 0.54)",
-                  },
-                  open
-                    ? {
-                        mr: 3,
-                      }
-                    : {
-                        mr: "auto",
-                      },
-                ]}
-              >
-                {item.icon}
-              </ListItemIcon>
-              <ListItemText
-                primary={item.text}
-                sx={[
-                  open
-                    ? {
-                        opacity: 1,
-                      }
-                    : {
-                        opacity: 0,
-                      },
-                ]}
-              />
-            </ListItemButton>
-          </ListItem>
-        ))}
-      </List>
+      <List>{renderListItems(array3)}</List>
       <Divider
         sx={
           Ctheme === "light"
