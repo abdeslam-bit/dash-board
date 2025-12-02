@@ -56,35 +56,34 @@ export default function Calendar() {
   return (
     <div className={Ctheme === "dark" ? "dark" : ""}>
       <div className="demo-app">
-      <Stack direction="row">
-        <Sidebar
-          weekendsVisible={weekendsVisible}
-          handleWeekendsToggle={handleWeekendsToggle}
-          currentEvents={currentEvents}
-        />
-        <div className="demo-app-main  dark:text-white flex-1">
-          <FullCalendar
-            plugins={[dayGridPlugin, timeGridPlugin, interactionPlugin]}
-            headerToolbar={{
-              left: "prev,next today",
-              center: "title",
-              right: "dayGridMonth,timeGridWeek,timeGridDay",
-            }}
-            initialView="dayGridMonth"
-            editable={true}
-            selectable={true}
-            selectMirror={true}
-            dayMaxEvents={true}
-            weekends={weekendsVisible}
-            initialEvents={INITIAL_EVENTS} // alternatively, use the `events` setting to fetch from a feed
-            select={handleDateSelect}
-            eventContent={renderEventContent} // custom render function
-            eventClick={handleEventClick}
-            eventsSet={handleEvents} // called after events are initialized/added/changed/removed
+        <div className="flex flex-col-reverse sm:flex-row">
+          <Sidebar
+            weekendsVisible={weekendsVisible}
+            handleWeekendsToggle={handleWeekendsToggle}
+            currentEvents={currentEvents}
           />
+          <div className="demo-app-main  dark:text-white flex-1">
+            <FullCalendar
+              plugins={[dayGridPlugin, timeGridPlugin, interactionPlugin]}
+              headerToolbar={{
+                left: "prev,next today",
+                center: "title",
+                right: "dayGridMonth,timeGridWeek,timeGridDay",
+              }}
+              initialView="dayGridMonth"
+              editable={true}
+              selectable={true}
+              selectMirror={true}
+              dayMaxEvents={true}
+              weekends={weekendsVisible}
+              initialEvents={INITIAL_EVENTS} // alternatively, use the `events` setting to fetch from a feed
+              select={handleDateSelect}
+              eventContent={renderEventContent} // custom render function
+              eventClick={handleEventClick}
+              eventsSet={handleEvents} // called after events are initialized/added/changed/removed
+            />
+          </div>
         </div>
-
-      </Stack>
       </div>
     </div>
   );
@@ -101,7 +100,7 @@ function renderEventContent(eventInfo) {
 
 function Sidebar({ weekendsVisible, handleWeekendsToggle, currentEvents }) {
   return (
-    <div className="w-60 bg-[#eaf9ff] p-5 leading-loose mr-10">
+    <div className="w-full mt-5 sm:w-60 bg-[#eaf9ff] p-5 leading-loose mr-10">
       <div>
         <h2>Instructions</h2>
         <ul>
