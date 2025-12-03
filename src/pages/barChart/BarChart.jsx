@@ -31,7 +31,7 @@ export default function BarChart() {
 
   return (
     <div className={Ctheme === "dark" ? "dark" : ""}>
-      <Box sx={{ height: "75vh" }}>
+      <Box sx={{ height: "75vh",width:"91vw" }}>
         <ResponsiveBar
           data={data}
           indexBy="year"
