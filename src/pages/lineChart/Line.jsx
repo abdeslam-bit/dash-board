@@ -272,31 +272,24 @@ const data = [
   },
 ];
 
-export default function LineChart() {
+export default function Line() {
   const { Ctheme } = useContext(ThemeContext);
 
-  // Theme with background color
+  // Theme for text color
   const chartTheme = {
-    background: Ctheme === "dark" ? "rgba(0, 0, 0, 0.54)" : "#ffffff",
     text: {
       fill: Ctheme === "dark" ? "#ffffff" : "#333333",
     },
     grid: {
       line: {
-        stroke: "transparent",
+        stroke: "transparent", // Remove grid lines
       },
     },
   };
 
   return (
     <div className={Ctheme === "dark" ? "dark" : ""}>
-      <Box 
-        sx={{ 
-          height: "75vh", 
-          width: "91vw",
-          backgroundColor:"transparent"
-        }}
-      >
+      <Box sx={{ height: "280px",width:"100%",minWidth:100}}>
         <ResponsiveLine
           data={data}
           theme={chartTheme}
